@@ -1,0 +1,49 @@
+
+
+#container {
+    transform: translate(0, 50px);
+}
+
+svg {
+    /* remove spacing between svgs, ref[0] */
+    margin-top: -4px;
+}
+
+.interval {
+    fill: #ff4dff;
+    stroke: #b300b3;
+    opacity: 0.7;
+    clip-path: url(#clip_interval);
+}
+
+.event {
+    stroke-width: 2px;
+    stroke: #0066ff;
+    clip-path: url(#clip_event);
+}
+
+.axis .tick line {
+    opacity: 0.1;
+    stroke-width: 2px;
+}
+
+.line_infreq {
+    fill: none;
+    stroke: #000000;
+    stroke-width: 2px;
+    opacity: 0.3;
+    clip-path: url(#clip_infreq);
+}
+
+.circle_infreq {
+    fill: #ffffff;
+    stroke: #29a329;
+    stroke-width: 2px;
+    clip-path: url(#clip_infreq);
+}
+
+.line_freq {
+    fill: none;
+    stroke: #000000;
+    clip-path: url(#clip_freq);
+}
