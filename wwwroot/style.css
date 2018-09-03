@@ -13,12 +13,17 @@ svg {
     fill: #ff4dff;
     stroke: #b300b3;
     opacity: 0.7;
+    filter:url('#blur');
     clip-path: url(#clip_interval);
+    animation: skewing-child .2s ease-in-out infinite alternate;
 }
 
 .event {
-    stroke-width: 2px;
-    stroke: #0066ff;
+    stroke-width: 3px;
+    stroke: #a200ff;
+    
+    
+    filter:url('#blur');
     clip-path: url(#clip_event);
 }
 
@@ -39,7 +44,9 @@ svg {
     fill: #ffffff;
     stroke: #29a329;
     stroke-width: 2px;
+    
     clip-path: url(#clip_infreq);
+    
 }
 
 .line_freq {
@@ -47,3 +54,14 @@ svg {
     stroke: #000000;
     clip-path: url(#clip_freq);
 }
+
+
+@keyframes skewing-child {
+    0%      { transform: skewX(-5deg); }
+    100%     { transform: skewX(5deg); }
+  }
+
+  @keyframes squishing {
+    10%, 40%, 80% { transform: scale(1, .9); }
+    0%, 30%, 60%, 100% {transform: scale(.9, 1);}
+  }

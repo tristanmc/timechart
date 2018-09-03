@@ -124,7 +124,8 @@ function plotCircles (selection, params) {
            .attr('class', `circle_${params.plot_type}`)
            .attr('cx', d => getScaleTime()(d.date_time))
            .attr('cy', d => params.scale_y(d.ob))
-           .attr('r', '5');
+           .attr('r', '5')
+           .style('fill', 'red');
 }
 
 function plotLine (selection, params) {
