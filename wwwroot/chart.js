@@ -1,4 +1,4 @@
-
+$(function() {
 
 /*
 PLOT TYPES:
@@ -9,7 +9,7 @@ PLOT TYPES:
 */
 
 addAxisTime();
-addViz('interval');
+//addViz('interval');
 addViz('event');
 addViz('infreq');
 addViz('freq');
@@ -27,9 +27,10 @@ function addAxisTime () {
 // PLOTS (INITIAL) 
 //---------------------
 
-function addViz (plot_type) {
+function addViz (plot_type, data) {
   const svg = addSVG(plot_type);
-  const data = getData()[plot_type];
+  if (!data) data = getData()[plot_type];
+  //const data = getData()[plot_type];
 
   switch (plot_type) {
     case 'interval':
@@ -418,4 +419,49 @@ REFERENCES
 [3] https://bl.ocks.org/mbostock/db6b4335bf1662b413e7968910104f0f
 [4] https://github.com/d3/d3-zoom/blob/master/README.md#zoom-transforms
 */
+
+
+    "use strict";
+
+    console.log('Hubbing ...')
+    
+    var connection = new signalR.HubConnectionBuilder().withUrl("/dataHub").build();
+    
+    connection.on("ReceiveMessage", function (user, data) {
+        
+        //addAxisTime();
+        //addViz('interval', );
+        //addViz('event');
+        //addViz('infreq');
+        //addViz('freq');
+        
+        const days = d3.range(1, 16);
+        const d = days.map(day => {
+                     return { 
+                        on: new Date(2017, 4, day, 7), 
+                       off: new Date(2017, 4, day, 22) 
+                     };
+                   })
+                   .filter(date_time => {
+                     return date_time.on  <= getDateExtent().end && 
+                            date_time.off <= getDateExtent().end;
+                   });
+
+
+        // console.log(d[0]);
+
+        addViz('interval');
+
+        //var svg = d3.select('svg');
+        //plotIntervals(svg, d1);
+    });
+    
+    
+    
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+    
+});
+
 
