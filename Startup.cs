@@ -19,6 +19,7 @@ namespace temporalchart
             services.AddSignalR();
 
             services.AddSingleton(typeof(ILoader), typeof(Loader));
+            services.AddSingleton(typeof(IAnalyser), typeof(Analyser));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,9 +41,12 @@ namespace temporalchart
             {
                 var input =  await new StreamReader(context.Request.Body).ReadToEndAsync();
                 var loader = context.RequestServices.GetService<ILoader>();
-                var t = "blah";
-                await loader.Load(t);
-                await context.Response.WriteAsync($"blah");
+                await loader.Load(input);
+
+                var analyser = context.RequestServices.GetService<IAnalyser>();
+                var res = analyser.GetSentiment("It was a bad day");
+
+                await context.Response.WriteAsync(res.ToString());
             });
         }
     }
